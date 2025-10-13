@@ -12,4 +12,5 @@ postsRoutes(app)
 app.get('/', (reg, res) => {
   res.send('Hello from Express!')
 })
+
 export { app }
