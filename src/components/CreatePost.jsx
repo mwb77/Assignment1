@@ -1,16 +1,20 @@
 import { useState } from 'react'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
+
 import { createPost } from '../api/posts.js'
 
 export function CreatePost() {
   const [title, setTitle] = useState('')
   const [author, setAuthor] = useState('')
   const [contents, setContents] = useState('')
+
   const queryClient = useQueryClient()
+
   const createPostMutation = useMutation({
     mutationFn: () => createPost({ title, author, contents }),
     onSuccess: () => queryClient.invalidateQueries(['posts']),
   })
+
   const handleSubmit = (e) => {
     e.preventDefault()
     createPostMutation.mutate()
@@ -49,7 +53,7 @@ export function CreatePost() {
       <input
         type='submit'
         value={createPostMutation.isPending ? 'Creating...' : 'Create'}
-        disabled={!title || createPostMutation.isPending}
+        disabled={!title}
       />
       {createPostMutation.isSuccess ? (
         <>
