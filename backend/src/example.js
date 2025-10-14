@@ -7,11 +7,13 @@ dotenv.config()
 await initDatabase()
 
 const post = new Post({
-  title: 'Hello Third Post',
-  author: 'John Doe',
-  contents: 'This post is stored in a MongoDB database using Mongoose.',
-  tags: ['mongoose', 'mongodb'],
+  title: 'Another Post',
+  author: 'From Someone',
+  contents: 'This is another test post.',
+  tags: ['frontend'],
 })
+
 await post.save()
+
 const posts = await Post.find()
 console.log(posts)
