@@ -53,7 +53,7 @@ export function CreatePost() {
       <input
         type='submit'
         value={createPostMutation.isPending ? 'Creating...' : 'Create'}
-        disabled={!title}
+        disabled={!title || createPostMutation.isPending}
       />
       {createPostMutation.isSuccess ? (
         <>
