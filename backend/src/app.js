@@ -5,14 +5,14 @@ import bodyParser from 'body-parser'
 import cors from 'cors'
 import { createServer } from 'node:http'
 import { Server } from 'socket.io'
-
 const app = express()
 app.use(bodyParser.json())
 app.use(cors())
-
 postsRoutes(app)
 userRoutes(app)
-
+app.get('/', (req, res) => {
+  res.send('Hello from Express Nodemon!')
+})
 const server = createServer(app)
 const io = new Server(server, {
   cors: {
@@ -25,10 +25,5 @@ io.on('connection', (socket) => {
     console.log('user disconnected:', socket.id)
   })
 })
-
-app.get('/', (req, res) => {
-  res.send('Hello from Express Nodemon!')
-})
-
 export { server as app }
 // export { app }
